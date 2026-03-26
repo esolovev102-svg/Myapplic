@@ -3,6 +3,9 @@
     android:id="@+id/tv_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:textSize="18sp"
-    android:background="?attr/selectableItemBackground" />
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:textColor="#3F51B5"/>

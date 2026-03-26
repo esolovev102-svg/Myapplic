@@ -1,5 +1,6 @@
 package com.kushkov.myapplic;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ public class TaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         String title = getIntent().getStringExtra(EXTRA_TASK_TITLE);
         String taskText = getIntent().getStringExtra(EXTRA_TASK_TEXT);

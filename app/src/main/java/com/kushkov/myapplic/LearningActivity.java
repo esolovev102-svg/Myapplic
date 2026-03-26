@@ -1,6 +1,7 @@
 package com.kushkov.myapplic;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,7 +10,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LearningActivity extends AppCompatActivity {
-
     private static final String TASK_TEXT =
             "Решите следующую задачу:\n\n" +
             "Дано число N. Напишите алгоритм, который определяет, является ли оно простым. " +
@@ -32,8 +32,9 @@ public class LearningActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learning);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        String topic = getIntent().getStringExtra(LevelSetupActivity.EXTRA_TOPIC);
+        String topic = getIntent().getStringExtra(SelectionActivity.EXTRA_CATEGORY);
         setTitle(topic);
 
         TextView tvLecturesHeader = findViewById(R.id.tv_lectures_header);

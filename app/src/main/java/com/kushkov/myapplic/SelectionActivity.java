@@ -1,6 +1,7 @@
 package com.kushkov.myapplic;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ public class SelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         String category = getIntent().getStringExtra(EXTRA_CATEGORY);
 
@@ -28,22 +30,7 @@ public class SelectionActivity extends AppCompatActivity {
             case "subjects":
                 title = "Школьные предметы";
                 items = Arrays.asList(
-                        "Математика", "Физика", "Химия", "Биология",
-                        "История", "География", "Литература", "Информатика"
-                );
-                break;
-            case "languages":
-                title = "Иностранные языки";
-                items = Arrays.asList(
-                        "Английский", "Немецкий", "Французский",
-                        "Испанский", "Китайский", "Японский"
-                );
-                break;
-            case "programming":
-                title = "Языки программирования";
-                items = Arrays.asList(
-                        "Python", "Java", "Kotlin", "JavaScript",
-                        "C++", "C#", "Swift", "Go"
+                        "Математика", "Русский язык", "Окружающий мир", "Физическая культура",  "Английский язык", "Литературное чтение"
                 );
                 break;
             default:
@@ -57,9 +44,8 @@ public class SelectionActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new SelectionAdapter(items, item -> {
-            Intent intent = new Intent(this, LevelSetupActivity.class);
+            Intent intent = new Intent(this, LearningActivity.class);
             intent.putExtra(EXTRA_CATEGORY, category);
-            intent.putExtra(LevelSetupActivity.EXTRA_TOPIC, item);
             startActivity(intent);
         }));
     }

@@ -1,5 +1,6 @@
 package com.kushkov.myapplic;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ public class LectureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecture);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         String title = getIntent().getStringExtra(EXTRA_LECTURE_TITLE);
         String content = getIntent().getStringExtra(EXTRA_LECTURE_CONTENT);
