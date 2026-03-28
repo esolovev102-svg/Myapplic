@@ -16,11 +16,10 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Button btnSubjects = findViewById(R.id.btn_subjects);
-        btnSubjects.setOnClickListener(v -> openSelection("subjects"));
+        btnSubjects.setOnClickListener(v -> openSelection());
     }
-    private void openSelection(String category) {
+    private void openSelection() {
         Intent intent = new Intent(this, SelectionActivity.class);
-        intent.putExtra(SelectionActivity.EXTRA_CATEGORY, category);
         startActivity(intent);
     }
 }

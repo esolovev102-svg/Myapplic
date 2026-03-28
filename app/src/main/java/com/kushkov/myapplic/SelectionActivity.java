@@ -14,6 +14,7 @@ import java.util.List;
 public class SelectionActivity extends AppCompatActivity {
 
     public static final String EXTRA_CATEGORY = "EXTRA_CATEGORY";
+    public static final String EXTRA_TOPIC = "EXTRA_TOPIC";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,23 +22,13 @@ public class SelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selection);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        String category = getIntent().getStringExtra(EXTRA_CATEGORY);
-
         List<String> items;
         String title;
 
-        switch (category != null ? category : "") {
-            case "subjects":
-                title = "Школьные предметы";
-                items = Arrays.asList(
-                        "Математика", "Русский язык", "Окружающий мир", "Физическая культура",  "Английский язык", "Литературное чтение"
-                );
-                break;
-            default:
-                title = "Выбор";
-                items = Arrays.asList();
-                break;
-        }
+        title = "Школьные предметы";
+        items = Arrays.asList(
+                "Математика", "Русский язык", "Окружающий мир", "Физическая культура",  "Английский язык", "Литературное чтение"
+        );
 
         setTitle(title);
 
@@ -45,7 +36,7 @@ public class SelectionActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new SelectionAdapter(items, item -> {
             Intent intent = new Intent(this, LearningActivity.class);
-            intent.putExtra(EXTRA_CATEGORY, category);
+            intent.putExtra(EXTRA_TOPIC, item);
             startActivity(intent);
         }));
     }
