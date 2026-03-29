@@ -13,24 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LearningActivity extends AppCompatActivity {
     public static final String EXTRA_TOPIC = "EXTRA_TOPIC";
-    private static final String TASK_TEXT =
-            "Решите следующую задачу:\n\n" +
-            "Дано число N. Напишите алгоритм, который определяет, является ли оно простым. " +
-            "Опишите шаги решения своими словами.";
-    private static final String LECTURE_CONTENT =
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-            "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.\n\n" +
-            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore " +
-            "eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, " +
-            "sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n" +
-            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium " +
-            "doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore " +
-            "veritatis et quasi architecto beatae vitae dicta sunt explicabo.\n\n" +
-            "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, " +
-            "sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.";
+    public static final String EXTRA_USER_COMMENT = "EXTRA_USER_COMMENT";
 
     TextView name;
+    String userComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +24,9 @@ public class LearningActivity extends AppCompatActivity {
         setContentView(R.layout.activity_learning);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        String topic = getIntent().getStringExtra(SelectionActivity.EXTRA_TOPIC);
+        String topic = getIntent().getStringExtra(CommentActivity.EXTRA_TOPIC);
+        userComment = getIntent().getStringExtra(CommentActivity.EXTRA_USER_COMMENT);
+        if (userComment == null) userComment = "";
         setTitle(topic);
 
         name = findViewById(R.id.name);
@@ -328,15 +316,23 @@ public class LearningActivity extends AppCompatActivity {
         tv.setClickable(true);
         tv.setFocusable(true);
         tv.setOnClickListener(v -> {
+            String subject = name.getText().toString();
+            // Extract topic name after colon, e.g. "Лекция 3: Сложение" -> "Сложение"
+            String topic = text.contains(": ") ? text.substring(text.indexOf(": ") + 2) : text;
             if (isLecture) {
-                Intent intent = new Intent(this, LectureActivity.class);
+                Intent intent = new Intent(this, LectureCommentActivity.class);
                 intent.putExtra(LectureActivity.EXTRA_LECTURE_TITLE, text);
-                intent.putExtra(LectureActivity.EXTRA_LECTURE_CONTENT, LECTURE_CONTENT);
+                intent.putExtra(LectureActivity.EXTRA_LECTURE_SUBJECT, subject);
+                intent.putExtra(LectureActivity.EXTRA_LECTURE_TOPIC, topic);
+                intent.putExtra(CommentActivity.EXTRA_USER_COMMENT, userComment);
+                intent.putExtra(LectureActivity.EXTRA_TEXT_COLOR, name.getCurrentTextColor());
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(this, TaskActivity.class);
                 intent.putExtra(TaskActivity.EXTRA_TASK_TITLE, text);
-                intent.putExtra(TaskActivity.EXTRA_TASK_TEXT, TASK_TEXT);
+                intent.putExtra(TaskActivity.EXTRA_TASK_SUBJECT, subject);
+                intent.putExtra(TaskActivity.EXTRA_TASK_TOPIC, topic);
+                intent.putExtra(CommentActivity.EXTRA_USER_COMMENT, userComment);
                 startActivity(intent);
             }
         });

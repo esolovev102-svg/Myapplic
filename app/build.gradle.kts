@@ -1,8 +1,8 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
 }
-
-import java.util.Properties
 
 val localProperties = Properties().apply {
     val localFile = rootProject.file("local.properties")
@@ -33,12 +33,12 @@ android {
         buildConfigField(
             "String",
             "LLM_BASE_URL",
-            "\"${localProperties.getProperty("llmBaseUrl", "https://api.openai.com/v1/")}\""
+            "\"${localProperties.getProperty("llmBaseUrl", "https://openrouter.ai/api/v1/")}\""
         )
         buildConfigField(
             "String",
             "LLM_MODEL",
-            "\"${localProperties.getProperty("llmModel", "gpt-4.1-mini")}\""
+            "\"${localProperties.getProperty("llmModel", "openrouter/free")}\""
         )
     }
 
@@ -71,6 +71,10 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.recyclerview)
     implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    implementation(libs.glide)
+    annotationProcessor(libs.glide.compiler)
+    implementation(libs.glide.okhttp3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

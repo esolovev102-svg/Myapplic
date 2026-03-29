@@ -35,7 +35,7 @@ public class SelectionActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new SelectionAdapter(items, item -> {
-            Intent intent = new Intent(this, LearningActivity.class);
+            Intent intent = new Intent(this, CommentActivity.class);
             intent.putExtra(EXTRA_TOPIC, item);
             startActivity(intent);
         }));
