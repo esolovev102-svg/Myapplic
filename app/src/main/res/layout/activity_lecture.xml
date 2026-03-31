@@ -33,7 +33,8 @@
         android:text="Изменить пожелания"
         android:backgroundTint="#3F51B5"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textSize="19sp"/>
 
     <Button
         android:id="@+id/btn_to_learning"
@@ -44,6 +45,7 @@
         android:text="К темам"
         android:backgroundTint="#3F51B5"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textSize="19sp"/>
 
 </FrameLayout>

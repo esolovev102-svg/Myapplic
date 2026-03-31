@@ -17,7 +17,8 @@
             android:textSize="32sp"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:layout_margin="16dp"/>
+            android:layout_margin="16dp"
+            />
 
         <ImageView
             android:id="@+id/learning_image"
@@ -33,7 +34,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="▶ Теория"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:background="?attr/selectableItemBackground" />
 
@@ -52,7 +53,7 @@
             android:padding="16dp"
             android:layout_marginTop="8dp"
             android:text="▶ Задания"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:background="?attr/selectableItemBackground" />
 
