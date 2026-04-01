@@ -27,9 +27,6 @@
             android:name=".SelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".CommentActivity"
-            android:exported="false" />
-        <activity
             android:name=".LearningActivity"
             android:exported="false" />
         <activity
@@ -40,6 +37,9 @@
             android:exported="false" />
         <activity
             android:name=".TaskActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TaskCommentActivity"
             android:exported="false" />
     </application>
 

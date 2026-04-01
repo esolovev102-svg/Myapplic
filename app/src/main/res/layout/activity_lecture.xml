@@ -34,7 +34,7 @@
         android:backgroundTint="#3F51B5"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="19sp"/>
+        android:textSize="18sp"/>
 
     <Button
         android:id="@+id/btn_to_learning"
@@ -46,6 +46,6 @@
         android:backgroundTint="#3F51B5"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="19sp"/>
+        android:textSize="18sp"/>
 
 </FrameLayout>

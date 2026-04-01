@@ -19,6 +19,7 @@ public class LectureActivity extends AppCompatActivity {
     public static final String EXTRA_LECTURE_SUBJECT = "EXTRA_LECTURE_SUBJECT";
     public static final String EXTRA_LECTURE_TOPIC = "EXTRA_LECTURE_TOPIC";
     public static final String EXTRA_TEXT_COLOR = "EXTRA_TEXT_COLOR";
+    public static final String EXTRA_LECTURE_COMMENT = "EXTRA_LECTURE_COMMENT";
 
     private LinearLayout container;
     private ProgressBar progressBar;
@@ -33,8 +34,7 @@ public class LectureActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra(EXTRA_LECTURE_TITLE);
         String subject = getIntent().getStringExtra(EXTRA_LECTURE_SUBJECT);
         String topic = getIntent().getStringExtra(EXTRA_LECTURE_TOPIC);
-        String userComment = getIntent().getStringExtra(CommentActivity.EXTRA_USER_COMMENT);
-        if (userComment == null) userComment = "";
+        String userComment = getIntent().getStringExtra(EXTRA_LECTURE_COMMENT);
         textColor = getIntent().getIntExtra(EXTRA_TEXT_COLOR, 0);
 
         setTitle(title);
@@ -44,13 +44,10 @@ public class LectureActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         findViewById(R.id.btn_back_to_comment).setOnClickListener(v -> finish());
-
         final String finalSubject = subject;
-        final String finalTopic = topic;
         findViewById(R.id.btn_to_learning).setOnClickListener(v -> {
             Intent intent = new Intent(this, LearningActivity.class);
-            intent.putExtra(CommentActivity.EXTRA_TOPIC, finalSubject);
-            intent.putExtra(CommentActivity.EXTRA_USER_COMMENT, getIntent().getStringExtra(CommentActivity.EXTRA_USER_COMMENT));
+            intent.putExtra(SelectionActivity.EXTRA_TOPIC, finalSubject);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
@@ -58,8 +55,7 @@ public class LectureActivity extends AppCompatActivity {
         // Добавляем первый пустой TextView для стриминга
         container.addView(makeParagraph(""));
 
-        final String finalUserComment = userComment;
-        new LlmClient().generateLecture(subject, topic, finalUserComment, new LlmClient.LlmStreamCallback() {
+        new LlmClient().generateLecture(subject, topic, userComment, new LlmClient.LlmStreamCallback() {
             @Override
             public void onChunk(String chunk) {
                 runOnUiThread(() -> appendChunk(chunk));

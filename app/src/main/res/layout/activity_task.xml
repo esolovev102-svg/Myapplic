@@ -30,7 +30,8 @@
                 android:hint="Введите ваш ответ..."
                 android:inputType="textMultiLine"
                 android:minLines="5"
-                android:textSize="24sp"/>
+                android:textSize="24sp"
+                android:background="@android:drawable/edit_text"/>
 
             <Button
                 android:id="@+id/btn_submit"

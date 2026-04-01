@@ -13,9 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LearningActivity extends AppCompatActivity {
     public static final String EXTRA_TOPIC = "EXTRA_TOPIC";
-    public static final String EXTRA_USER_COMMENT = "EXTRA_USER_COMMENT";
 
-    TextView name, lecture, tasks;
+    TextView name;
     String userComment;
 
     @Override
@@ -24,9 +23,8 @@ public class LearningActivity extends AppCompatActivity {
         setContentView(R.layout.activity_learning);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        String topic = getIntent().getStringExtra(CommentActivity.EXTRA_TOPIC);
-        userComment = getIntent().getStringExtra(CommentActivity.EXTRA_USER_COMMENT);
-        if (userComment == null) userComment = "";
+        String topic = getIntent().getStringExtra(SelectionActivity.EXTRA_TOPIC);
+        userComment = "";
         setTitle(topic);
 
         name = findViewById(R.id.name);
@@ -36,12 +34,10 @@ public class LearningActivity extends AppCompatActivity {
         TextView tvLecturesHeader = findViewById(R.id.tv_lectures_header);
         LinearLayout containerLectures = findViewById(R.id.container_lectures);
         setupToggle(tvLecturesHeader, containerLectures, "Лекции");
-        tvLecturesHeader.setTextColor(name.getCurrentTextColor());
 
         TextView tvTasksHeader = findViewById(R.id.tv_tasks_header);
         LinearLayout containerTasks = findViewById(R.id.container_tasks);
         setupToggle(tvTasksHeader, containerTasks, "Задания");
-        tvTasksHeader.setTextColor(name.getCurrentTextColor());
 
         switch (topic != null ? topic : "") {
             case "Математика":
@@ -305,8 +301,9 @@ public class LearningActivity extends AppCompatActivity {
                 image.setImageResource(R.drawable.fima);
                 break;
         }
+        tvLecturesHeader.setTextColor(name.getCurrentTextColor());
+        tvTasksHeader.setTextColor(name.getCurrentTextColor());
     }
-
     private void addItem(LinearLayout container, String text, boolean isLecture) {
         TextView tv = new TextView(this);
         tv.setText(text);
@@ -326,15 +323,13 @@ public class LearningActivity extends AppCompatActivity {
                 intent.putExtra(LectureActivity.EXTRA_LECTURE_TITLE, text);
                 intent.putExtra(LectureActivity.EXTRA_LECTURE_SUBJECT, subject);
                 intent.putExtra(LectureActivity.EXTRA_LECTURE_TOPIC, topic);
-                intent.putExtra(CommentActivity.EXTRA_USER_COMMENT, userComment);
                 intent.putExtra(LectureActivity.EXTRA_TEXT_COLOR, name.getCurrentTextColor());
                 startActivity(intent);
             } else {
-                Intent intent = new Intent(this, TaskActivity.class);
+                Intent intent = new Intent(this, TaskCommentActivity.class);
                 intent.putExtra(TaskActivity.EXTRA_TASK_TITLE, text);
                 intent.putExtra(TaskActivity.EXTRA_TASK_SUBJECT, subject);
                 intent.putExtra(TaskActivity.EXTRA_TASK_TOPIC, topic);
-                intent.putExtra(CommentActivity.EXTRA_USER_COMMENT, userComment);
                 startActivity(intent);
             }
         });

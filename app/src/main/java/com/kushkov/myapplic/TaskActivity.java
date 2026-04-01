@@ -15,6 +15,7 @@ public class TaskActivity extends AppCompatActivity {
     public static final String EXTRA_TASK_TITLE = "EXTRA_TASK_TITLE";
     public static final String EXTRA_TASK_SUBJECT = "EXTRA_TASK_SUBJECT";
     public static final String EXTRA_TASK_TOPIC = "EXTRA_TASK_TOPIC";
+    public static final String EXTRA_TASK_COMMENT = "EXTRA_TASK_COMMENT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,7 @@ public class TaskActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra(EXTRA_TASK_TITLE);
         String subject = getIntent().getStringExtra(EXTRA_TASK_SUBJECT);
         String topic = getIntent().getStringExtra(EXTRA_TASK_TOPIC);
-        String userComment = getIntent().getStringExtra(CommentActivity.EXTRA_USER_COMMENT);
-        if (userComment == null) userComment = "";
+        String userComment = getIntent().getStringExtra(EXTRA_TASK_COMMENT);
 
         setTitle(title);
 
@@ -37,8 +37,7 @@ public class TaskActivity extends AppCompatActivity {
         btnSubmit.setEnabled(false);
         progressBar.setVisibility(View.VISIBLE);
 
-        final String finalUserComment = userComment;
-        new LlmClient().generateTask(subject, topic, finalUserComment, new LlmClient.LlmStreamCallback() {
+        new LlmClient().generateTask(subject, topic, userComment, new LlmClient.LlmStreamCallback() {
             @Override
             public void onChunk(String chunk) {
                 runOnUiThread(() -> tvTaskText.append(chunk));

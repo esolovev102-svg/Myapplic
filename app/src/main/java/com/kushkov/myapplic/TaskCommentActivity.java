@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LectureCommentActivity extends AppCompatActivity {
+public class TaskCommentActivity extends AppCompatActivity {
 
     private Button btnRead;
     private ProgressBar progressBar;
@@ -19,36 +19,36 @@ public class LectureCommentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lecture_comment);
+        setContentView(R.layout.activity_task_comment);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        String lectureTitle = getIntent().getStringExtra(LectureActivity.EXTRA_LECTURE_TITLE);
-        String subject = getIntent().getStringExtra(LectureActivity.EXTRA_LECTURE_SUBJECT);
-        String topic = getIntent().getStringExtra(LectureActivity.EXTRA_LECTURE_TOPIC);
+        String taskTitle = getIntent().getStringExtra(TaskActivity.EXTRA_TASK_TITLE);
+        String subject = getIntent().getStringExtra(TaskActivity.EXTRA_TASK_SUBJECT);
+        String topic = getIntent().getStringExtra(TaskActivity.EXTRA_TASK_TOPIC);
         int textColor = getIntent().getIntExtra(LectureActivity.EXTRA_TEXT_COLOR, 0);
-        setTitle(lectureTitle);
+        setTitle(taskTitle);
 
-        EditText etComment = findViewById(R.id.et_comment);
-        btnRead = findViewById(R.id.btn_read_lecture);
-        progressBar = findViewById(R.id.progress_bar);
+        EditText etComment = findViewById(R.id.edit_comment);
+        btnRead = findViewById(R.id.btn_do_task);
+        progressBar = findViewById(R.id.prog_bar);
 
         btnRead.setOnClickListener(v -> {
-            String lectureComment = etComment.getText().toString().trim();
-            if (lectureComment.isEmpty()) {
-                proceed(lectureTitle, subject, topic, textColor, "");
+            String taskComment = etComment.getText().toString().trim();
+            if (taskComment.isEmpty()) {
+                proceed(taskTitle, subject, topic, textColor, "");
                 return;
             }
             btnRead.setEnabled(false);
             progressBar.setVisibility(View.VISIBLE);
-            new LlmClient().validateComment(lectureComment, new LlmClient.LlmCallback() {
+            new LlmClient().validateComment(taskComment, new LlmClient.LlmCallback() {
                 @Override
                 public void onSuccess(String result) {
                     runOnUiThread(() -> {
                         progressBar.setVisibility(View.GONE);
                         if (result.toUpperCase().contains("OK")) {
-                            proceed(lectureTitle, subject, topic, textColor, lectureComment);
+                            proceed(taskTitle, subject, topic, textColor, taskComment);
                         } else {
-                            proceed(lectureTitle, subject, topic, textColor, lectureComment);
+                            proceed(taskTitle, subject, topic, textColor, taskComment);
                         }
                     });
                 }
@@ -58,7 +58,7 @@ public class LectureCommentActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         progressBar.setVisibility(View.GONE);
                         btnRead.setEnabled(true);
-                        Toast.makeText(LectureCommentActivity.this,
+                        Toast.makeText(TaskCommentActivity.this,
                                 "Ошибка проверки: " + error, Toast.LENGTH_LONG).show();
                     });
                 }
@@ -73,13 +73,13 @@ public class LectureCommentActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
     }
 
-    private void proceed(String lectureTitle, String subject, String topic, int textColor, String comment) {
+    private void proceed(String taskTitle, String subject, String topic, int textColor, String comment) {
         Intent intent = new Intent(this, LectureActivity.class);
-        intent.putExtra(LectureActivity.EXTRA_LECTURE_TITLE, lectureTitle);
-        intent.putExtra(LectureActivity.EXTRA_LECTURE_SUBJECT, subject);
-        intent.putExtra(LectureActivity.EXTRA_LECTURE_TOPIC, topic);
+        intent.putExtra(TaskActivity.EXTRA_TASK_TITLE, taskTitle);
+        intent.putExtra(TaskActivity.EXTRA_TASK_SUBJECT, subject);
+        intent.putExtra(TaskActivity.EXTRA_TASK_TOPIC, topic);
         intent.putExtra(LectureActivity.EXTRA_TEXT_COLOR, textColor);
-        intent.putExtra(LectureActivity.EXTRA_LECTURE_COMMENT, comment);
+        intent.putExtra(TaskActivity.EXTRA_TASK_COMMENT, comment);
         startActivity(intent);
     }
 }
