@@ -57,7 +57,7 @@ public class LlmClient {
             return;
         }
         String prompt = "Напиши лекцию для ученика 1–4 класса по теме \"" + topic + "\" (" + subject + ")."
-                + " 3 абзаца, простой язык, без markdown.";
+                + " 3 абзаца, простой язык, без markdown, строго на русском языке.";
         if (userComment != null && !userComment.isEmpty()) {
             prompt += " Пожелания: " + userComment;
         }

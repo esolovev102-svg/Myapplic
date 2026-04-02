@@ -74,7 +74,7 @@ public class TaskCommentActivity extends AppCompatActivity {
     }
 
     private void proceed(String taskTitle, String subject, String topic, int textColor, String comment) {
-        Intent intent = new Intent(this, LectureActivity.class);
+        Intent intent = new Intent(this, TaskActivity.class);
         intent.putExtra(TaskActivity.EXTRA_TASK_TITLE, taskTitle);
         intent.putExtra(TaskActivity.EXTRA_TASK_SUBJECT, subject);
         intent.putExtra(TaskActivity.EXTRA_TASK_TOPIC, topic);

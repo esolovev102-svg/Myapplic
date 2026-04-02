@@ -9,7 +9,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/fima"
-        android:label="@string/app_name"
+        android:label="Учимся с Фимой"
         android:roundIcon="@drawable/fima"
         android:supportsRtl="true"
         android:theme="@style/Theme.Myapplic">
