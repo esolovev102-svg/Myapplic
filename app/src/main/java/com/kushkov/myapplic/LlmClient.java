@@ -79,6 +79,11 @@ public class LlmClient {
         }
         sendStreamRequest(prompt, key, callback);
     }
+    public void validateAnswer(String task, String answer, LlmCallback callback) {
+        String prompt = "Задание: \"" + task + "\"\n" + "Ответ на это задание: \"" + answer + "\"\n"
+                + "Этот ответ верный? Ответь одним словом: OK или NO.";
+        sendRequest(prompt, callback);
+    }
 
     private void sendStreamRequest(String prompt, String cacheKey, LlmStreamCallback callback) {
         try {

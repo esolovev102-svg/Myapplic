@@ -16,6 +16,7 @@ public class LearningActivity extends AppCompatActivity {
 
     TextView name;
     String userComment;
+    ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class LearningActivity extends AppCompatActivity {
 
         name = findViewById(R.id.name);
         name.setText(topic);
-        ImageView image = findViewById(R.id.learning_image);
+        image = findViewById(R.id.learning_image);
 
         TextView tvLecturesHeader = findViewById(R.id.tv_lectures_header);
         LinearLayout containerLectures = findViewById(R.id.container_lectures);
@@ -330,6 +331,7 @@ public class LearningActivity extends AppCompatActivity {
                 intent.putExtra(TaskActivity.EXTRA_TASK_TITLE, text);
                 intent.putExtra(TaskActivity.EXTRA_TASK_SUBJECT, subject);
                 intent.putExtra(TaskActivity.EXTRA_TASK_TOPIC, topic);
+                intent.putExtra(TaskActivity.EXTRA_TEXT_COLOR, name.getCurrentTextColor());
                 startActivity(intent);
             }
         });
