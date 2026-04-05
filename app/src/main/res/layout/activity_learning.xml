@@ -43,8 +43,7 @@
             android:padding="16dp"
             android:text="▶ Лекции"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:background="?attr/selectableItemBackground" />
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:id="@+id/container_lectures"
