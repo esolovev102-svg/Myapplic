@@ -2,11 +2,9 @@ package com.kushkov.myapplic;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,9 +26,9 @@ public class LectureActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecture);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         String title = getIntent().getStringExtra(EXTRA_LECTURE_TITLE);
         String subject = getIntent().getStringExtra(EXTRA_LECTURE_SUBJECT);
@@ -108,13 +106,13 @@ public class LectureActivity extends AppCompatActivity {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.bottomMargin = dp(12);
+        params.bottomMargin = dp();
         tv.setLayoutParams(params);
         return tv;
     }
 
-    private int dp(int value) {
+    private int dp() {
         return (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
+                TypedValue.COMPLEX_UNIT_DIP, 12, getResources().getDisplayMetrics());
     }
 }

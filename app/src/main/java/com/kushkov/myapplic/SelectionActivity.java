@@ -12,15 +12,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SelectionActivity extends AppCompatActivity {
-
-    public static final String EXTRA_CATEGORY = "EXTRA_CATEGORY";
     public static final String EXTRA_TOPIC = "EXTRA_TOPIC";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         List<String> items;
         String title;

@@ -27,14 +27,13 @@ public class TaskActivity extends AppCompatActivity {
     ImageView image;
     EditText et_answer;
     TextView fima_text;
-    private int textcolor;
     Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         String title = getIntent().getStringExtra(EXTRA_TASK_TITLE);
@@ -52,7 +51,7 @@ public class TaskActivity extends AppCompatActivity {
         Button btnSubmit = findViewById(R.id.btn_submit);
         et_answer = findViewById(R.id.et_answer);
         fima_text = findViewById(R.id.fima_text);
-        textcolor = getIntent().getIntExtra(EXTRA_TEXT_COLOR, 0);
+        int textcolor = getIntent().getIntExtra(EXTRA_TEXT_COLOR, 0);
         fima_text.setTextColor(textcolor);
         tvTaskText.setTextColor(textcolor);
         button = findViewById(R.id.btn_back);

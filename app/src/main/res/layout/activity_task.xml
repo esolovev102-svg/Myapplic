@@ -80,8 +80,5 @@
             android:textStyle="bold"
             android:layout_marginBottom="16dp"
             android:visibility="gone"/>
-
-
     </LinearLayout>
-
 </FrameLayout>

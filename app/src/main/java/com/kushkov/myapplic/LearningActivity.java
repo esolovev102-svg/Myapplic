@@ -12,20 +12,17 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LearningActivity extends AppCompatActivity {
-    public static final String EXTRA_TOPIC = "EXTRA_TOPIC";
 
     TextView name;
-    String userComment;
     ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learning);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         String topic = getIntent().getStringExtra(SelectionActivity.EXTRA_TOPIC);
-        userComment = "";
         setTitle(topic);
 
         name = findViewById(R.id.name);
